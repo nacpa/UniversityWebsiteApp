@@ -11,7 +11,6 @@ class CustomText extends StatelessWidget {
      this.bold=false,
        this.FontFamily="Roboto",
        this.lineShrink=false
-
   });
   String txt;
   double txtSize;

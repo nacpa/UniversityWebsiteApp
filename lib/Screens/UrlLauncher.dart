@@ -24,7 +24,7 @@ class _UrLauntcherState extends State<UrLauntcher> {
   Widget build(BuildContext context) {
 
     return Scaffold(body:   Stack(
-      children: [
+      children: [ 
         Container(child:  WebView(
           onWebViewCreated: (c){
           // widget.controller=c;
@@ -82,7 +82,7 @@ class _UrLauntcher_State extends State<UrLauntcher_> {
         Container(child:  WebView(onWebViewCreated: (c){
           // widget.controller=c;
         },
-          onPageStarted: (url) {
+          onPageStarted: (url) {   
             setState(() {
               loadingPercentage = 0;
             });

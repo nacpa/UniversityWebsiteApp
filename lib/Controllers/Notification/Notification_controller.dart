@@ -19,7 +19,7 @@ class Notification_controller extends GetxController {
   void showNotification(
       {int id = 0, String? tittle, String? body, String? payload}) async {
     AndroidNotificationDetails androidNotificationDetails =
-        const AndroidNotificationDetails("hello", "help",
+        const AndroidNotificationDetails("hello",  "help",
             importance: Importance.high, priority: Priority.high);
     NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);

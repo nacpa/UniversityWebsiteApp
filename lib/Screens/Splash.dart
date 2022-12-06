@@ -1,15 +1,18 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:universitywebsiteapp/Dependencies/Dependencies.dart';
 
 import '../Constant/Dmension.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'Auth/Login.dart';
 
+final auth=FirebaseAuth.instance;
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -28,6 +31,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
+    init();
     getConnectivity();
     controller =
     AnimationController(vsync: this, duration: const Duration(seconds: 5))
@@ -95,15 +99,17 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
           Center(
             child: ScaleTransition(
               scale: animation,
-              child: Container(
-                height: D.Hight / 4,
-                width: D.Hight / 4,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                          "assets/images/gkv_logo.png",
-                        ),
-                        fit: BoxFit.fill)),
+              child: Hero(tag: "gkv",
+                child: Container(
+                  height: D.Hight / 4.5,
+                  width: D.Hight / 4,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                            "assets/images/gkv_logo.png",
+                          ),
+                          fit: BoxFit.fill)),
+                ),
               ),
             ),
           ),

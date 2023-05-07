@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:universitywebsiteapp/Dependencies/Dependencies.dart';
+import 'package:universitywebsiteapp/Screens/HomePage.dart';
 
 import '../Constant/Dmension.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -35,7 +36,20 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     getConnectivity();
     controller =
     AnimationController(vsync: this, duration: const Duration(seconds: 5))
-      ..forward().whenComplete(() =>  Get.off(login()));
+      ..forward().whenComplete(() {
+
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if(user==null){
+          Get.off(Get.off(login()));
+
+        }else{
+          Get.off(HomePage());
+        }
+      });
+
+
+
+      });
     animation =
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
     getConnectivity();

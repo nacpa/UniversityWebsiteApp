@@ -81,7 +81,9 @@ class login extends GetView<Notification_controller> {
 
                         await   auth.signInWithEmailAndPassword(email: _controller.text, password: _controller_password.text).then((value) async {
                           controller.initialize();
-                          controller.showNotification(tittle: auth.currentUser?.displayName??" ",body: "Sign In Sucessfully");
+                          Future.delayed(const Duration(seconds: 3)).then((value) =>  controller.showNotification(tittle: auth.currentUser?.displayName??UserName,body: "Sign In Sucessfully") );
+
+
                           await Get.off(HomePage());
                           toast("Sign In Sucessfully");
 

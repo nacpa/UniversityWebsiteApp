@@ -3,21 +3,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:universitywebsiteapp/Screens/Auth/Login.dart';
+import 'package:universitywebsiteapp/Screens/HomePage.dart';
 
+String? UserName;
 class Google_auth {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // handleAuthState() {
-  //   return StreamBuilder(
-  //       stream: FirebaseAuth.instance.authStateChanges(),
-  //       builder: (BuildContext context, snapshot) {
-  //         if (snapshot.hasData) {
-  //           return AuthHome();
-  //         } else {
-  //           return  Login();
-  //         }
-  //       });
-  // }
+  handleAuthState() {
+    return StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, snapshot) {
+          if (snapshot.hasData) {
+            return HomePage();
+          } else {
+            return  login();
+          }
+        });
+  }
 
   // function to implement the google signin
 
@@ -38,10 +41,15 @@ class Google_auth {
       // Getting users credential
       UserCredential result = await auth.signInWithCredential(authCredential);
       User? user = result.user;
+      UserName=user!.displayName;
 
       if (result != null) {
+        print("SignUp");
 
-      } // if result not null we simply call the MaterialpageRoute,
+
+      } else{
+        print("SignUp   ghmggggg");
+      }// if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }
   }
@@ -65,16 +73,19 @@ class Google_auth {
     await _auth.signInWithCredential(credential);
     final user = userCredential.additionalUserInfo?.username;
     // await Get.to(SignUp(Name: userCredential.user!.displayName??"",));
-    // if(userCredential.additionalUserInfo!.isNewUser){
-    //
-    //   await Get.find<Auth_controller>().Login_Social(userCredential.user!.email!,
-    //       userCredential.user!.displayName!, userCredential.user!.photoURL!);
-    // }
-    // else{
-    //   // await Get.find<Auth_controller>().Login_Social(userCredential.user!.email!,
-    //   //     userCredential.user!.displayName!, userCredential.user!.photoURL!);
-    //
-    // }
+    if(userCredential.additionalUserInfo!.isNewUser){
+      UserName=userCredential.user?.displayName;
+      print("SignUp");
+      // await Get.find<Auth_controller>().Login_Social(userCredential.user!.email!,
+      //     userCredential.user!.displayName!, userCredential.user!.photoURL!);
+    }
+    else{
+      UserName=userCredential.user?.displayName;
+      print("SignUp jmbnb");
+      // await Get.find<Auth_controller>().Login_Social(userCredential.user!.email!,
+      //     userCredential.user!.displayName!, userCredential.user!.photoURL!);
+
+    }
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);

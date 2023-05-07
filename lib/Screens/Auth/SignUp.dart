@@ -90,7 +90,7 @@ class Signup extends GetView<Notification_controller> {
                        await   auth.createUserWithEmailAndPassword(email: _controller_Email.text, password: _controller_password.text).then((value) async {
                          auth.currentUser?.updateDisplayName(_controller.text);
                          controller.initialize();
-                         controller.showNotification(tittle:_controller.text,body: "Sign Up Sucessfully");
+                         controller.showNotification(tittle:_controller.text??UserName,body: "Sign Up Sucessfully");
                          await Get.off(login());
                          toast("Sign Up Sucessfully");
 
@@ -118,7 +118,7 @@ class Signup extends GetView<Notification_controller> {
                       clr: Colors.black),
                   IconButton(
                     onPressed: () async {
-                      await Google_auth().signInWithGoogle();
+                      await Google_auth().signup(context);
                     },
                     iconSize: D.Hight30 * 2.5,
                     color: Colors.black,

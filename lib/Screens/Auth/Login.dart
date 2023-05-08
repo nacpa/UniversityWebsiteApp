@@ -84,7 +84,7 @@ class login extends GetView<Notification_controller> {
                           Future.delayed(const Duration(seconds: 3)).then((value) =>  controller.showNotification(tittle: auth.currentUser?.displayName??UserName,body: "Sign In Sucessfully") );
 
 
-                          await Get.off(HomePage());
+                          await Get.offAll(HomePage());
                           toast("Sign In Sucessfully");
 
 

@@ -10,6 +10,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 
   print("Handling a background message: ${message.messageId}");
+  await FirebaseMessaging.instance.subscribeToTopic("GKV");
 }
 
 
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print( FirebaseMessaging.instance.getToken());
-    return GetMaterialApp(
+    return GetMaterialApp(debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
